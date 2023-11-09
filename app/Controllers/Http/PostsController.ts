@@ -1,6 +1,7 @@
 // import type { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { schema } from "@ioc:Adonis/Core/Validator"
 import Post from "App/Models/Post"
+import PostValidator from "App/Validators/PostValidator"
 
 export default class PostsController {
   
@@ -13,13 +14,8 @@ export default class PostsController {
   }
 
   public async createPost({ request }) {
-    const validationSchema = schema.create({
-      content: schema.string()
-    })
 
-    const validatedData = await request.validate({
-      schema: validationSchema,
-    })
+    const validatedData = await request.validate(PostValidator)
 
     const userId = 1
 
